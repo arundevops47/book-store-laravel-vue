@@ -2,24 +2,24 @@
 
 create .env file, paste content from .env.example to .env
 
-composer install
-yarn install
-php artisan key:generate
-php artisan migrate
-php artisan db:seed
-php artisan elasticsearch:ping   <!-- check if elasticsearch working -->
-php artisan generate:bookindex   <!-- generate index of all books in books table -->
+1. composer install
+2. yarn install
+3. php artisan key:generate
+4. php artisan migrate
+5. php artisan db:seed
+6. php artisan elasticsearch:ping   <!-- check if elasticsearch working -->
+7. php artisan generate:bookindex   <!-- generate index of all books in books table -->
 
-1. In one terminal window run server as 
+8. In one terminal window run server as 
 php artisan serve
 
-2. In another terminal window run npm for dev (not for production)
+9. In another terminal window run npm for dev (not for production)
 yarn dev
 
 
-default admin login 
-email: admin@admin.com
-password: password
+default admin login <br>
+email: admin@admin.com  <br>
+password: password  <br>
 
 
 ## API
