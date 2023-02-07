@@ -14,44 +14,46 @@ const props = defineProps({
 </script>
 
 <template>
-	<VCard title="Book Details">
-		<div class="d-flex justify-space-between flex-wrap flex-md-nowrap flex-column flex-md-row">
-			<div class="ma-auto pa-5">
-				<VImg
-					width="139"
-					:src="book.image"
-				/>
-			</div>
+	<VCard class="mb-4">
+		 <VRow>
+			<VCol 
+				cols="12"
+				md="12"
+				lg="2">
+				<div class="ma-auto pa-5 d-flex justify-space-between">
+					<VImg
+						width="139"
+						:src="book.image"
+					/>
+				</div>
+			</VCol>
+				<!-- <VDivider :vertical="$vuetify.display.mdAndUp" /> -->
+			<VCol 
+				cols="12"
+				md="12"
+				lg="10">
+				<div>
+					<VCardItem>
+						<VCardTitle>{{book.title}}</VCardTitle>
+						<VCardSubtitle class="text-caption font-weight-bold pa-0">
+							By {{book.author}}
+						</VCardSubtitle>							
+					</VCardItem>
 
-			<VDivider :vertical="$vuetify.display.mdAndUp" />
+					<VCardText>
+						{{book.description}}
+					</VCardText>
 
-			<div>
-				<VCardItem>
-					<VCardTitle>{{book.title}}</VCardTitle>
-					<VCardSubtitle class="text-caption font-weight-bold pa-0">
-						By {{book.author}}
-					</VCardSubtitle>							
-				</VCardItem>
-
-				<VCardText>
-					{{book.description}}
-				</VCardText>
-
-				<VCardText class="text-subtitle-1">
-					<p><span class="font-weight-bold">Genre :</span> <span>{{book.genre}}</span></p>
-					<p><span class="font-weight-bold">ISBN :</span> <span>{{book.isbn}}</span></p>
-					<p><span class="font-weight-bold">Published :</span> <span>{{book.published}}</span></p>
-					<p><span class="font-weight-bold">Publisher :</span> <span>{{book.publisher}}</span></p>
-				</VCardText>
-			</div>
-		</div>
+					<VCardText class="text-subtitle-1">
+						<p><span class="font-weight-bold">Genre :</span> <span>{{book.genre}}</span></p>
+						<p><span class="font-weight-bold">ISBN :</span> <span>{{book.isbn}}</span></p>
+						<p><span class="font-weight-bold">Published :</span> <span>{{book.published}}</span></p>
+						<p><span class="font-weight-bold">Publisher :</span> <span>{{book.publisher}}</span></p>
+					</VCardText>
+				</div>
+			</VCol>
+		</VRow>
 	</VCard>
-
-  <!-- 👉 Edit book info dialog -->
-  <!-- <BookInfoEditDialog
-    v-model:isDialogVisible="isBookInfoEditDialogVisible"
-    :book-data="props.bookData"
-  /> -->
 </template>
 
 <style lang="scss" scoped>

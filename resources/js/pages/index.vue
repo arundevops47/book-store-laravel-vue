@@ -2,17 +2,18 @@
 import { useBookListStore } from '@/views/guest/books/useBookListStore'
 import { avatarText } from '@core/utils/formatters'
 import { useToast } from "vue-toastification";
+import BookList from '@/views/guest/books/view/BookList.vue'
 
 const toast = useToast();
 const bookListStore = useBookListStore()
+const books = ref([])
 const bookData = ref() 
 const searchQuery = ref('')
-const rowPerPage = ref(10)
+const rowPerPage = ref(12)
 const currentPage = ref(1)
 const totalPage = ref(1)
 const totalBooks = ref(0)
 const sortBy = ref('asc')
-const books = ref([])
 const showLoader = ref(false)
 const filters = ref([])
 const selectedFilters = ref({})
@@ -91,6 +92,32 @@ const paginationData = computed(() => {
 
 <template>
   <section>
+		<VRow class="pb-4">
+			<VCol 
+				cols="12">
+				<VCard>
+					<VCardText class="d-flex flex-wrap py-4 gap-4">
+						<div class="app-book-search-filter d-flex align-center justify-start flex-wrap gap-4">
+							<VTextField
+								v-model="searchQuery"
+								placeholder="Search Title"
+								density="compact"
+							/>
+						</div>					
+						<VSpacer />
+						<div class="me-3">
+							<VSelect
+								v-model="rowPerPage"
+								density="compact"
+								variant="outlined"
+								:items="[12, 24, 48]"
+							/>
+						</div>
+					</VCardText>
+				</VCard>
+			</VCol>
+		</VRow>
+
     <VRow>
 			<VCol 
 				cols="12"
@@ -121,174 +148,32 @@ const paginationData = computed(() => {
 					</VExpansionPanels>
 				</VCard>
 			</VCol>
-      <VCol 
+
+			<VCol 
 				cols="12"
-				md="12"
-				lg="10">
-        <VCard title="Book List">
-          <VCardText class="d-flex flex-wrap py-4 gap-4">
-            <div
-              class="me-3"
-              style="width: 80px;"
-            	>
-              <VSelect
-                v-model="rowPerPage"
-                density="compact"
-                variant="outlined"
-                :items="[10, 20, 30, 50]"
-              />
-            </div>
+				md="6"
+				lg="10"
+				>
+				<template v-if="books.length">
+					<BookList :books="books"/>
+				</template>
+				<template v-else>
+				</template>
 
-            <VSpacer />
+				<VCardText class="d-flex align-center flex-wrap justify-space-between gap-4 py-3 px-5">
+					<span class="text-sm text-disabled">
+						{{ paginationData }}
+					</span>
 
-            <div class="app-book-search-filter d-flex align-center justify-end flex-wrap gap-4">
-              <!-- 👉 Search  -->
-              <div style="width: 10rem;">
-                <VTextField
-                  v-model="searchQuery"
-                  placeholder="Search Title"
-                  density="compact"
-                />
-              </div>
+					<VPagination
+						v-model="currentPage"
+						size="small"
+						:total-visible="5"
+						:length="totalPage"
+					/>
+				</VCardText>
 
-            </div>
-          </VCardText>
-
-          <VDivider />
-
-          <VTable class="text-no-wrap">
-            <!-- 👉 table head -->
-            <thead>
-              <tr>
-                <th scope="col">
-                  ID
-                </th>							
-                <th scope="col">
-                  Title
-                </th>
-                <th scope="col">
-                  Author
-                </th>
-                <th scope="col">
-                  Genre
-                </th>								
-                <!-- <th scope="col">
-                  Description
-                </th>	 -->
-                <th scope="col">
-                  ISBN
-                </th>
-                <th scope="col">
-                  Published	
-                </th>		
-                <th scope="col">
-                  Publisher	
-                </th>																																
-              </tr>
-            </thead>
-            <!-- 👉 table body -->
-            <tbody v-show="books.length">
-              <tr
-                v-for="book in books"
-                :key="book.id"
-                style="height: 3.75rem;"
-              	>
-
-                <!-- 👉 ID -->
-                <td>
-                  <span class="text-base font-weight-semibold">{{ book.id }}</span>
-                </td>
-
-                <!-- 👉 Title -->
-                <td>
-                  <div class="d-flex align-center">
-                    <VAvatar
-                      variant="tonal"
-                      class="me-3"
-                      size="38"
-                    	>
-                      <VImg
-                        v-if="book.image"
-                        :src="book.image"
-                      />
-                      <span v-else>{{ avatarText(book.title) }}</span>
-                    </VAvatar>
-
-                    <div class="d-flex flex-column">
-                      <h6 class="text-base">
-                        <RouterLink
-                          :to="{ name: 'books-id', params: { id: book.id } }"
-                          class="font-weight-medium book-list-name"
-                        >
-                          {{ book.title }}
-                        </RouterLink>
-                      </h6>
-                    </div>
-                  </div>
-                </td>
-
-                <!-- 👉 author -->
-                <td>
-                  <span class="text-base">{{ book.author }}</span>
-                </td>
-
-                <!-- 👉 genre -->
-                <td>
-                  <span class="text-base">{{ book.genre }}</span>
-                </td>
-
-                <!-- 👉 description -->
-                <!-- <td>
-                  <span class="text-base">{{ book.description }}</span>
-                </td> -->
-
-                <!-- 👉 isbn -->
-                <td>
-                  <span class="text-base">{{ book.isbn }}</span>
-                </td>
-
-                <!-- 👉 published -->
-                <td>
-                  <span class="text-base">{{ book.published }}</span>
-                </td>
-
-                <!-- 👉 publisher -->
-                <td>
-                  <span class="text-base">{{ book.publisher }}</span>
-                </td>
-
-              </tr>
-            </tbody>
-
-            <!-- 👉 table footer  -->
-            <tfoot v-show="!books.length">
-              <tr>
-                <td
-                  colspan="9"
-                  class="text-center"
-                >
-                  No book available
-                </td>
-              </tr>
-            </tfoot>
-          </VTable>
-
-          <VDivider />
-
-          <VCardText class="d-flex align-center flex-wrap justify-space-between gap-4 py-3 px-5">
-            <span class="text-sm text-disabled">
-              {{ paginationData }}
-            </span>
-
-            <VPagination
-              v-model="currentPage"
-              size="small"
-              :total-visible="5"
-              :length="totalPage"
-            />
-          </VCardText>
-        </VCard>
-      </VCol>
+			</VCol>
     </VRow>
   </section>
 </template>
