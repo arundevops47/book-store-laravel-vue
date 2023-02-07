@@ -57,8 +57,9 @@ const fetchBooks = () => {
 
   let filters = JSON.parse(JSON.stringify(selectedFilters.value));
 	if(Object.keys(filters).length) {
+		params.filters = {}
 		for (const [key, value] of Object.entries(filters)) {
-			params[key] = value.map(v => '(' + v + ')').join(" OR ");
+			params.filters[key] = value.map(v => '(' + v + ')').join(" OR ");
 		}
 	}
 

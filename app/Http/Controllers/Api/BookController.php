@@ -36,19 +36,11 @@ class BookController extends Controller
 			$elastic_query .= '('. $req->q.') OR ';
 		}
 
-		if (isset($req->genre) && $req->genre != '') {
-			$elastic_fields[] = 'genre';
-			$elastic_query .= $req->genre;
-		}
-
-		if (isset($req->authors) && $req->authors != '') {
-			$elastic_fields[] = 'author';
-			$elastic_query .= $req->authors;
-		}
-
-		if (isset($req->isbn) && $req->isbn != '') {
-			$elastic_fields[] = 'isbn';
-			$elastic_query .= $req->isbn;
+		if(isset($req->filters)) {
+			foreach($req->filters as $key => $val) {
+				$elastic_fields[] = $key;
+				$elastic_query .= $val .' OR ';
+			}
 		}
 
 		if(count($elastic_fields)) {
@@ -119,7 +111,7 @@ class BookController extends Controller
 		$filters = array(
 			array('label' => 'Genre', 'value' => 'genre', 'items' => $genres->toArray()),
 			array('label' => 'ISBN', 'value' => 'isbn', 'items' => $isbn->toArray()),
-			array('label' => 'Authors', 'value' => 'authors', 'items' => $authors->toArray()),
+			array('label' => 'Authors', 'value' => 'author', 'items' => $authors->toArray()),
 		);
 
 		return response()->json([

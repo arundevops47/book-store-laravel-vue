@@ -1,19 +1,18 @@
 ## How to run
 
-create .env file, paste content from .env.example to .env
+1. create .env file, paste content from .env.example to .env
+2. composer install
+3. yarn install
+4. php artisan key:generate
+5. php artisan migrate
+6. php artisan db:seed
+7. php artisan elasticsearch:ping   (check if elasticsearch working)
+8. php artisan generate:bookindex   (generate index of all books in books table)
 
-1. composer install
-2. yarn install
-3. php artisan key:generate
-4. php artisan migrate
-5. php artisan db:seed
-6. php artisan elasticsearch:ping   (check if elasticsearch working)
-7. php artisan generate:bookindex   (generate index of all books in books table)
+9. In one terminal run server as <br>
+php artisan serve  
 
-8. In one terminal run server as <br>
-php artisan serve
-
-1. In another terminal run command <br>
+10. In another terminal run command <br>
 yarn dev
 
 
@@ -32,13 +31,21 @@ http://localhost:8000/api/books?q=&perPage=10&page=1&sortBy=asc
 ## Elasticsearch Installation in ubuntu
 
 // elasticsearch version 8  (java is required for elasticsearch, assuming that it already installed)
+
 wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.1-linux-x86_64.tar.gz
+
 wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.1-linux-x86_64.tar.gz.sha512
+
 shasum -a 512 -c elasticsearch-8.6.1-linux-x86_64.tar.gz.sha512 
+
 tar -xzf elasticsearch-8.6.1-linux-x86_64.tar.gz
+
 cd elasticsearch-8.6.1/ 
+
 echo 'export ES_HOME="$HOME/elasticsearch-8.6.1/"' >> ~/.bashrc
+
 echo 'export PATH="$ES_HOME/bin:$PATH"' >> ~/.bashrc
+
 exec $SHELL
 
 ## Run Elasticsearch
@@ -65,7 +72,9 @@ http://localhost:9200/books/_doc/1
 Delete index
 
 curl -X DELETE 'http://localhost:9200/<name_of_index>'
+
 e.g.
+
 curl -X DELETE 'http://localhost:9200/books'
 
 
