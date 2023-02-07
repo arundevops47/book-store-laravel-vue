@@ -77,7 +77,7 @@ class BookController extends Controller
 		return response()->json([
 			'status' => 'OK',
 			'code' => 200,
-			'results' => $results,
+			'data' => $results,
 		]);
 	}
 

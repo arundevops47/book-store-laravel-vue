@@ -33,7 +33,7 @@ class RoleAndUserSeeder extends Seeder
 										array(
 											'name' => 'Admin',
 											'email' => 'admin@admin.com',
-											'password' => Hash::make(env('ADMIN_PASSWORD')),										
+											'password' => Hash::make(env('ADMIN_PASSWORD') || 'password'),										
 										)
 									)
 								),

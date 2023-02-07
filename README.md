@@ -7,13 +7,13 @@ create .env file, paste content from .env.example to .env
 3. php artisan key:generate
 4. php artisan migrate
 5. php artisan db:seed
-6. php artisan elasticsearch:ping   <!-- check if elasticsearch working -->
-7. php artisan generate:bookindex   <!-- generate index of all books in books table -->
+6. php artisan elasticsearch:ping   (check if elasticsearch working)
+7. php artisan generate:bookindex   (generate index of all books in books table)
 
-8. In one terminal window run server as 
+8. In one terminal run server as <br>
 php artisan serve
 
-9. In another terminal window run npm for dev (not for production)
+1. In another terminal run command 
 yarn dev
 
 
@@ -31,7 +31,7 @@ http://localhost:8000/api/books?q=&perPage=10&page=1&sortBy=asc
 
 ## Elasticsearch Installation in ubuntu
 
-// elasticsearch version 8
+// elasticsearch version 8  (java is required for elasticsearch, assuming that it already installed)
 wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.1-linux-x86_64.tar.gz
 wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.1-linux-x86_64.tar.gz.sha512
 shasum -a 512 -c elasticsearch-8.6.1-linux-x86_64.tar.gz.sha512 

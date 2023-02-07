@@ -1,12 +1,12 @@
 <script setup>
 import AddNewBookDrawer from '@/views/admin/books/add/AddNewBookDrawer.vue'
 import EditBookDrawer from '@/views/admin/books/edit/EditBookDrawer.vue'
-import { useBookListStore } from '@/views/admin/books/useBookListStore'
+import { useAdminBookListStore } from '@/views/admin/books/useAdminBookListStore'
 import { avatarText } from '@core/utils/formatters'
 import { useToast } from "vue-toastification";
 
 const toast = useToast();
-const bookListStore = useBookListStore()
+const adminBookListStore = useAdminBookListStore()
 const bookData = ref() 
 const searchQuery = ref('')
 const rowPerPage = ref(10)
@@ -22,16 +22,17 @@ const showConfirmDeleteDialog = ref(false);
 const deleteBookId = ref('')
 // 👉 Fetching books
 const fetchBooks = () => {
-  bookListStore.fetchBooks({
+  adminBookListStore.fetchBooks({
     q: searchQuery.value,
     perPage: rowPerPage.value,
     page: currentPage.value,
 		sortBy: sortBy.value,
   }).then(res => {
-    books.value = res.data.results.data
-    totalBooks.value = res.data.results.total
+		console.log('res ', res.data.data)
+    books.value = res.data.data.data
+    totalBooks.value = res.data.data.total
 		// console.log('totalPage ', Math.ceil(res.data.results.total/rowPerPage.value));
-    totalPage.value = Math.ceil(res.data.results.total/rowPerPage.value);
+    totalPage.value = Math.ceil(res.data.data.total/rowPerPage.value);
   }).catch(err => {
     console.error('err ', err)
   })
@@ -54,7 +55,7 @@ const paginationData = computed(() => {
 })
 
 const addNewBook = bookData => {
-  bookListStore.addBook(bookData).then((res)=> {
+  adminBookListStore.addBook(bookData).then((res)=> {
 		toast.success(res.data.msg, {
 			timeout: 2000
 		});
@@ -65,7 +66,7 @@ const addNewBook = bookData => {
 
 
 const updateBook = bookData => {
-  bookListStore.updateBook(bookData).then((res)=> {
+  adminBookListStore.updateBook(bookData).then((res)=> {
 		toast.success(res.data.msg, {
 			timeout: 2000
 		});
@@ -85,7 +86,7 @@ const onClickEditBook = (book) => {
 }
 
 const deleteBook = () => {
-  bookListStore.deleteBook(deleteBookId.value).then((res) => {
+  adminBookListStore.deleteBook(deleteBookId.value).then((res) => {
 		showConfirmDeleteDialog.value = false;
 		deleteBookId.value = '';
 		toast.success(res.data.msg, {

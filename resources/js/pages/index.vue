@@ -20,6 +20,8 @@ const selectedCheckbox = ref([]);
 
 // 👉 Fetching filters
 const fetchFilters = () => {
+	console.log('bookListStore ', bookListStore)
+	
   bookListStore.fetchFilters().then(res => {
 		filters.value = res.data.filters
   }).catch(err => {

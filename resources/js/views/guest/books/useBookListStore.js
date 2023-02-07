@@ -4,9 +4,9 @@ import { defineStore } from 'pinia'
 export const useBookListStore = defineStore('BookListStore', {
   actions: {
     // 👉 Fetch filters
-    fetchFilters(params) { 
+    fetchFilters() { 
       return new Promise((resolve, reject) => {
-        axios.get(`/api/filters`, { params })
+        axios.get(`/api/filters`)
 				.then(response => resolve(response))
 				.catch(error => reject(error))
       })

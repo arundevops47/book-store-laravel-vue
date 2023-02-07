@@ -1,12 +1,12 @@
 <script setup>
-import { useBookListStore } from '@/views/admin/books/useBookListStore'
+import { useAdminBookListStore } from '@/views/admin/books/useAdminBookListStore'
 import BookDetails from '@/views/admin/books/view/BookDetails.vue'
 
-const bookListStore = useBookListStore()
+const adminBookListStore = useAdminBookListStore()
 const route = useRoute()
 const book = ref()
 
-bookListStore.fetchBook(Number(route.params.id)).then(res => {
+adminBookListStore.fetchBook(Number(route.params.id)).then(res => {
   book.value = res.data.book;
 })
 </script>

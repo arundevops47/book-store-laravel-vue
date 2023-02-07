@@ -1,46 +1,46 @@
-import { defineStore } from 'pinia'
 import axios from '@axios'
+import { defineStore } from 'pinia'
 
-export const useBookListStore = defineStore('BookListStore', {
+export const useUserListStore = defineStore('UserListStore', {
   actions: {
-    // 👉 Fetch books data
-    fetchBooks(params) { 
+    // 👉 Fetch users data
+    fetchUsers(params) { 
       return new Promise((resolve, reject) => {
-        axios.get(`/api/admin/books`, { params })
+        axios.get(`/api/admin/users`, { params })
 				.then(response => resolve(response))
 				.catch(error => reject(error))
       })
 		},
-    // 👉 Add Book
-    addBook(bookData) {
+    // 👉 Add User
+    addUser(userData) {
       return new Promise((resolve, reject) => {
-        axios.post('/api/admin/books/save',bookData)
+        axios.post('/api/admin/users/save',userData)
 				.then(res => resolve(res))
         .catch(error => reject(error))
       })
     },
-    // 👉 fetch single book
-    fetchBook(id) {
+    // 👉 fetch single user
+    fetchUser(id) {
       return new Promise((resolve, reject) => {
-        axios.get(`/api/admin/books/${id}`)
+        axios.get(`/api/admin/users/${id}`)
 				.then(response => resolve(response))
 				.catch(error => reject(error))
       })
     },
-    // 👉 update Book
-    updateBook(bookData) {
+    // 👉 update User
+    updateUser(userData) {
       return new Promise((resolve, reject) => {
-        axios.post('/api/admin/books/update', {
-          book: bookData,
+        axios.post('/api/admin/users/update', {
+          user: userData,
         })
 				.then(response => resolve(response))
         .catch(error => reject(error))
       })
     },		
-    // 👉 delete book
-    deleteBook(id) {
+    // 👉 delete user
+    deleteUser(id) {
       return new Promise((resolve, reject) => {
-        axios.delete(`/api/admin/books/${id}`)
+        axios.delete(`/api/admin/users/${id}`)
 				.then(response => resolve(response))
 				.catch(error => reject(error))
       })
