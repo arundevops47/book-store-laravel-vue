@@ -30,7 +30,6 @@ class BookController extends Controller
 
 		$elastic_query = '';
 		$elastic_fields = [];
-		// $elastic_fields_qry = [];
 
 		if (isset($req->q) && $req->q != '') {
 			$elastic_fields[] = 'title';
@@ -39,12 +38,6 @@ class BookController extends Controller
 
 		if (isset($req->genre) && $req->genre != '') {
 			$elastic_fields[] = 'genre';
-			// if($elastic_query != '') {
-			// 	$elastic_query = $elastic_query.' OR '.$req->genre;
-			// }
-			// else {
-			// 	$elastic_query .= $req->genre;
-			// }
 			$elastic_query .= $req->genre;
 		}
 

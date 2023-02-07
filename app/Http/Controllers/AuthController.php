@@ -87,10 +87,6 @@ class AuthController extends Controller
 						'action' => 'read',
 						'subject' => 'Auth',
 					),
-					// array(
-					// 	'action' => 'read',
-					// 	'subject' => 'AclDemo',
-					// ),
 			);
 		}
 

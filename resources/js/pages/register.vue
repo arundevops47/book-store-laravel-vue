@@ -47,7 +47,6 @@ const register = () => {
 		router.push('login')
     return null
   }).catch(err => {
-		console.log('err ', err)
     const { errors: formErrors } = err.response.data
     errors.value = formErrors
   })

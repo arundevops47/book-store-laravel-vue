@@ -40,9 +40,7 @@ class BookController extends Controller
 				];
 
 				$response = $this->elastic->search($params);
-				// pr($response['hits']);		
 				$bookIds = array_column($response['hits']['hits'], '_id');
-				// pr($bookIds);
 
 				if (count($bookIds)) {
 					$qry->whereIn('id', $bookIds);
@@ -52,18 +50,6 @@ class BookController extends Controller
 				// $qry->orWhere('author', 'LIKE', "%{$req->q}%");
 			}
 		}
-
-		// if ($req->has('published')) {
-		// 	$qry->where('published', $req->published);
-		// }
-
-		// if ($req->has('publisher')) {
-		// 	$qry->where('publisher', $req->publisher);
-		// }
-
-		// if ($req->has('genre')) {
-		// 	$qry->where('genre', $req->genre);
-		// }
 
 
 		if ($req->sortBy == 'desc') {

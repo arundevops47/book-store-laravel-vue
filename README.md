@@ -13,7 +13,7 @@ create .env file, paste content from .env.example to .env
 8. In one terminal run server as <br>
 php artisan serve
 
-1. In another terminal run command 
+1. In another terminal run command <br>
 yarn dev
 
 

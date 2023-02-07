@@ -28,10 +28,8 @@ const fetchBooks = () => {
     page: currentPage.value,
 		sortBy: sortBy.value,
   }).then(res => {
-		console.log('res ', res.data.data)
     books.value = res.data.data.data
     totalBooks.value = res.data.data.total
-		// console.log('totalPage ', Math.ceil(res.data.results.total/rowPerPage.value));
     totalPage.value = Math.ceil(res.data.data.total/rowPerPage.value);
   }).catch(err => {
     console.error('err ', err)

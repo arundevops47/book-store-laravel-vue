@@ -19,9 +19,7 @@ const selectedFilters = ref({})
 const selectedCheckbox = ref([]);
 
 // 👉 Fetching filters
-const fetchFilters = () => {
-	console.log('bookListStore ', bookListStore)
-	
+const fetchFilters = () => {	
   bookListStore.fetchFilters().then(res => {
 		filters.value = res.data.filters
   }).catch(err => {
@@ -67,7 +65,6 @@ const fetchBooks = () => {
   bookListStore.fetchBooks(params).then(res => {
     books.value = res.data.data.data
     totalBooks.value = res.data.data.total
-		// console.log('totalPage ', Math.ceil(res.data.results.total/rowPerPage.value));
     totalPage.value = Math.ceil(res.data.data.total/rowPerPage.value);
   }).catch(err => {
     console.error('err ', err)
