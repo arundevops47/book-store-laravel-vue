@@ -157,8 +157,9 @@ const paginationData = computed(() => {
 				<template v-if="books.length">
 					<BookList :books="books"/>
 				</template>
-				<template v-else>
-				</template>
+				<VCard class="px-5 py-4 mb-4 text-center" v-else>
+					No book found
+				</VCard>
 
 				<VCardText class="d-flex align-center flex-wrap justify-space-between gap-4 py-3 px-5">
 					<span class="text-sm text-disabled">

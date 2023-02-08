@@ -15,7 +15,7 @@ const props = defineProps({
 
 <template>
 	<VCard class="mb-4">
-		 <VRow>
+		<VRow>
 			<VCol 
 				cols="12"
 				md="12"

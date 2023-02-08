@@ -12,15 +12,20 @@ bookListStore.fetchBook(Number(route.params.id)).then(res => {
 </script>
 
 <template>
-  <VRow v-if="book">
-    <VCol
-      cols="12"
-      md="6"
-      lg="12"
-    	>
-			<BookDetails :book="book"/>
-    </VCol>
-  </VRow>
+	<div>
+		<VRow v-if="book">
+			<VCol
+				cols="12"
+				md="6"
+				lg="12"
+				>
+				<BookDetails :book="book"/>
+			</VCol>
+		</VRow>
+		<VCard class="px-5 py-4 mb-4 text-center" v-else>
+			No book found
+		</VCard>
+	</div>
 </template>
 
 <route lang="yaml">
