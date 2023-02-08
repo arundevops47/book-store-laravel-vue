@@ -44,8 +44,8 @@ const props = defineProps({
 							</VCardItem>
 
 							<VCardText>
-								<template v-if="book.description.length > 80">
-									{{ book.description.substring(0, 80)+'...' }}
+								<template v-if="book.description.length > 50">
+									{{ book.description.substring(0, 50)+'...' }}
 								</template>
 								<template v-else>
 									{{ book.description }}
